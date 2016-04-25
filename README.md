@@ -7,3 +7,4 @@
 - `ml/knn.py` knn 算法实现问题最坏答案判断。
 - `ml/logicstic_reg.py` 逻辑回归法实现问题最坏答案检测。
 - `mc/gen_config.py` 生成 Minecraft 配置文件。
+- `Mathematical` 根据像素点的相似度拼接一堆切碎的图片。
