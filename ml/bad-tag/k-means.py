@@ -63,9 +63,9 @@ def k_means(data_set, k, centroids):
     return cluster_assment
 
 def main():
-    data_set = load_data_set("../data/tag_name.txt")
-    centroids = load_data_set("../data/1_stop_words.txt")
-    target_file = codecs.open("../data/2_bad_tags.txt", "w+", encoding="UTF-8")
+    data_set = load_data_set("../../data/tag_name.txt")
+    centroids = load_data_set("../../data/1_stop_words.txt")
+    target_file = codecs.open("../../data/2_bad_tags.txt", "w+", encoding="UTF-8")
     clust_assing = k_means(data_set, 22, centroids)
     for i in range(len(clust_assing)):
         # print int(clust_assing[i, 0])
