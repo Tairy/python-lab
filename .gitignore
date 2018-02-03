@@ -1,2 +1,6 @@
 *.txt
 data/*
+*.jpeg
+taobao_captcha*
+checkpoint
+tensorflow/check_point/*
