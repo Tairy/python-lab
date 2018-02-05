@@ -15,8 +15,8 @@ IMAGE_WIDTH = 20
 IMAGE_HEIGHT = 20
 CODE_LEN = 1
 MAX_CHAR = 10
-LOG_PATH = "/Users/tairy/Documents/Working/python-lab/tensorflow/tflog/"
-CHECK_POINT = "/Users/tairy/Documents/Working/python-lab/tensorflow/check_point/"
+LOG_PATH = "./tflog/"
+CHECK_POINT = "./check_point/"
 
 def get_projection_x(image):
     height, width = image.shape[:2]
@@ -341,15 +341,16 @@ def split_image(image_name):
     return x_batch
 
 def predict():
+    base_path = './test_set/'
     files = []
-    for item in os.walk('./test_set/'):
+    for item in os.walk(base_path):
         files = item[2]
         break
 
     model_predict = tflearn.DNN(cnn(), tensorboard_verbose=0, checkpoint_path=None,
                         best_checkpoint_path=CHECK_POINT,
                         max_checkpoints=100, tensorboard_dir=LOG_PATH)
-    model_predict.load('/Users/tairy/Documents/Working/python-lab/tensorflow/taobao_captcha')
+    model_predict.load('./taobao_captcha')
 
 
     for i, filename in enumerate(files):
@@ -362,7 +363,7 @@ def predict():
         for i in range(result.shape[0]):
             predict = vec2text(result[i])
             result_str += predict
-        os.renames('./test_set/' + filename, './test_set/' + result_str + '.jpeg')
+        os.renames(base_path + filename, base_path + result_str + '.jpeg')
         print('[+]预测结果:%s' % result_str)
 
 

@@ -10,13 +10,13 @@ from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
 
-TRAIN_SET_PATH = "/Users/tairy/Documents/Working/python-lab/tensorflow/train_splits/"
-VALID_SET_PATH = "/Users/tairy/Documents/Working/python-lab/tensorflow/valid_splits/"
+TRAIN_SET_PATH = "./train_splits/"
+VALID_SET_PATH = "./valid_splits/"
 MODEL_NAME = "taobao_captcha"
-MODEL_PATH = "/Users/tairy/Documents/Working/python-lab/tensorflow/model/"
-LOG_PATH = "/Users/tairy/Documents/Working/python-lab/tensorflow/tflog/"
-CHECK_POINT = "/Users/tairy/Documents/Working/python-lab/tensorflow/check_point/"
-PREDICT_PATH = "/Users/tairy/Documents/Working/python-lab/tensorflow/predict_splits/"
+MODEL_PATH = "./model/"
+LOG_PATH = "./tflog/"
+CHECK_POINT = "./check_point/"
+PREDICT_PATH = "./predict_splits/"
 IMAGE_WIDTH = 20
 IMAGE_HEIGHT = 20
 CODE_LEN = 1
