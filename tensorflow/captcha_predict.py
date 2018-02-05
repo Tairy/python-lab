@@ -97,9 +97,10 @@ def load_batch(path):
 
 def load_predict(path):
     files = []
-    for item in os.walk(path):
-        files = item[2]
-        break
+    # for item in os.walk(path):
+        # files = item[2]
+        # break
+    files = ['1-0-0.jpeg','1-1-1.jpeg','1-2-2.jpeg','1-3-3.jpeg', '1-4-4.jpeg', '1-5-5.jpeg']
     amount = len(files)
     print("[+]开始载入样本-%s" % (path))
     x_batch = np.zeros([amount, IMAGE_HEIGHT, IMAGE_WIDTH])
@@ -180,7 +181,7 @@ def predict():
         predict = vec2text(result[i])
         print('[+]预测结果:%s' % predict)
         print(">>>!<<<")
-        show_image(predict_X[i].reshape([IMAGE_HEIGHT, IMAGE_WIDTH]), gray=True)
+        # show_image(predict_X[i].reshape([IMAGE_HEIGHT, IMAGE_WIDTH]), gray=True)
 
 
 if __name__ == '__main__':
