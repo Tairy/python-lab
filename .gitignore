@@ -4,3 +4,5 @@ data/*
 taobao_captcha*
 checkpoint
 tensorflow/check_point/*
+.idea/*
+venv
