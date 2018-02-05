@@ -3,6 +3,6 @@ data/*
 *.jpeg
 taobao_captcha*
 checkpoint
-tensorflow/check_point/*
+captcha-rec/check_point/*
 .idea/*
 venv

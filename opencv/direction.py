@@ -3,7 +3,7 @@
 
 import cv2
 import numpy as np
-import Queue
+import queue
 
 camera = cv2.VideoCapture(0)
 width = int(camera.get(3))
@@ -32,8 +32,8 @@ num = 0
 # cursor_x = []
 # cursor_y = []
 
-q_x = Queue.Queue(maxsize = 10)
-q_y = Queue.Queue(maxsize = 10)
+q_x = queue.Queue(maxsize = 10)
+q_y = queue.Queue(maxsize = 10)
 
 while True:
   (grabbed, frame) = camera.read()
@@ -76,11 +76,11 @@ while True:
       # if diffx_sum < 0 and x_avg < 500:
       if diffx_sum < 0:
         # print "some coming form left"
-        print "left"
+        print("left")
         # cv2.putText(frame, "left", (100,100), 0, 0.5, (0,0,255),2)
       else:
         # cv2.putText(frame, "right", (100,100), 0, 0.5, (0,0,255),2)
-        print "right"
+        print("right")
 
       # print x_avg
       #   print key
