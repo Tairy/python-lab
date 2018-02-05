@@ -236,13 +236,17 @@ def drop_fall(image, divide):
 
 
 def main():
-    for item in os.walk('./predict_set'):
+    base_path = './valid_set/'
+    result_path = './valid_splits/'
+    for item in os.walk(base_path):
         files = item[2]
         break
-    # files = ['9234.jpeg']
+    # files = ['032890.jpeg']
     for file in files:
+        if '.DS_Store' == file:
+            continue
         print("当前待切割图片:%s" % (file))
-        img = cv2.imread('./predict_set/' + file)
+        img = cv2.imread(base_path + file)
         filename = file.split('.')[0]
 
         # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -276,30 +280,21 @@ def main():
         origin_split_image = img[min_y:max_y, min_x:max_x]
         split_image = thresh[min_y:max_y, min_x:max_x]
         split_image = cv2.cvtColor(split_image, cv2.COLOR_GRAY2BGR)
-        # cv2.imwrite("splits/origin_split_image.jpeg", origin_split_image)
-        # cv2.imwrite("splits/split_image.jpeg", split_image)
 
         for i in reversed(range(2, 7)):
             r_i = 6 - i
-            # print(r_i)
-            # print(filename[r_i])
             borders = drop_fall(split_image, i)
-            # print(borders)
             child_img = origin_split_image[borders[0][1]:borders[0][3], borders[0][0]:borders[0][2]]
             child_img = cv2.resize(child_img, (20, 20), interpolation=cv2.INTER_CUBIC)
-            # cv2.imwrite("predict_splits/" + filename + "-" + str(r_i) + "-" + filename[r_i] + ".jpeg", child_img)
-            cv2.imwrite("predict_splits/" + filename + "-" + str(r_i) + "-" + str(r_i) + ".jpeg", child_img)
+            cv2.imwrite(result_path + filename + "-" + str(r_i) + "-" + str(r_i) + ".jpeg", child_img)
 
             # break
             split_image = split_image[borders[1][1]:borders[1][3], borders[1][0]:borders[1][2]]
             origin_split_image = origin_split_image[borders[1][1]:borders[1][3], borders[1][0]:borders[1][2]]
-            # cv2.imwrite("splits/ss-" + filename + "-" + str(r_i) + "-" + filename[r_i] + ".jpeg", split_image)
             if 2 == i:
                 if len(origin_split_image) > 0:
                     origin_split_image = cv2.resize(origin_split_image, (20, 20), interpolation=cv2.INTER_CUBIC)
-                    # cv2.imwrite("predict_splits/" + filename + "-5-" + filename[5] + ".jpeg", origin_split_image)
-                    cv2.imwrite("predict_splits/" + filename + "-5-5.jpeg", origin_split_image)
-                    # cv2.imwrite("splits/child-" + str(i - 1) + ".jpeg", origin_split_image)
+                    cv2.imwrite(result_path + filename + "-5-5.jpeg", origin_split_image)
 
         print("切割完成:%s" % (file))
 
