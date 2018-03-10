@@ -1,6 +1,10 @@
 #!usr/bin/env python
 #coding=utf-8
 
+'''
+识别摄像有中物体的运动方向
+'''
+
 import cv2
 import numpy as np
 import queue
