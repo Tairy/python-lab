@@ -7,3 +7,4 @@ captcha-rec/check_point/*
 .idea/*
 venv
 *.avi
+*.mp4
