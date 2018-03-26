@@ -8,3 +8,4 @@ captcha-rec/check_point/*
 venv
 *.avi
 *.mp4
+*.wmv
