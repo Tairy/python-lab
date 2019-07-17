@@ -6,6 +6,7 @@ from tflearn.layers.core import input_data
 import re
 import os
 from es import es
+import collections
 
 MODEL_NAME = "log_classify"
 
@@ -140,9 +141,6 @@ def batch_load_logs():
     x_batch = np.zeros([log_count, dict_len])
     y_batch = np.zeros([log_count, tags_len])
 
-    # for i, filename in enumerate(files):
-    #     logs = [line.strip() for line in open("./dataset/" + filename, 'r')]
-    #     tag = filename.split('.')[0]
     for idx, log in enumerate(logs):
         log_arr = log.split("\t")
         log_str = log_arr[0]
@@ -170,12 +168,52 @@ def cnn(dict_len, tags_len):
     return network
 
 
+"""
+构建日志词典
+"""
+
+
+def build_dict(min_word_freq=1):
+    files = []
+    for item in os.walk('./dataset'):
+        files = item[2]
+        break
+    word_freq = collections.defaultdict(int)
+    dict_file = open("dict.txt", "a")
+    for i, filename in enumerate(files):
+        logs = [line.strip() for line in open("./dataset/" + filename, 'r')]
+        for log in logs:
+            words = re.findall("\w+", str.lower(log.strip()))
+            for word in words:
+                if word.isalpha():
+                    word_freq[word] += 1
+    word_freq = filter(lambda x: x[1] > min_word_freq, word_freq.items())
+    word_freq_sorted = sorted(word_freq, key=lambda x: (-x[1], x[0]))
+    word_dicts, _ = list(zip(*word_freq_sorted))
+    dict_content = ''
+    for w in word_dicts:
+        dict_content += w + "\n"
+
+    dict_file.write(dict_content)
+    dict_file.close()
+
+
+"""
+训练分类模型
+"""
+
+
 def train():
     # x_batch, y_batch, dict_len, tags_len, _, _ = log_to_vec('train')
     x_batch, y_batch, dict_len, tags_len = batch_load_logs()
     model = tflearn.DNN(cnn(dict_len, tags_len))
     model.fit(x_batch, y_batch, n_epoch=10, batch_size=16, show_metric=True)
     model.save("./model/" + MODEL_NAME)
+
+
+"""
+检查分类结果
+"""
 
 
 def predict():
@@ -191,5 +229,6 @@ def predict():
 
 
 if __name__ == "__main__":
-    # train()
+    build_dict(10)
+    train()
     predict()

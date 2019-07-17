@@ -10,3 +10,4 @@ venv
 *.avi
 *.mp4
 *.wmv
+log-classify/__pycache__/*
