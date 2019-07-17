@@ -2,6 +2,7 @@
 data/*
 *.jpeg
 taobao_captcha*
+log_classify*
 checkpoint
 captcha-rec/check_point/*
 .idea/*
